@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SOAP JavaScript Client Test</title>
+    <script type="text/javascript">
+        function soap() {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.open('POST', 'https://gateway.sagepayments.net/web_services/wsvtextensions/transaction_processing.asmx', true);
+
+            // build SOAP request
+            var sr =
+                '<?xml version="1.0" encoding="utf-8"?>' +
+                '<soapenv:Envelope ' + 
+                    'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ' +
+                    'xmlns:xsd="http://www.w3.org/2001/XMLSchema" ' +
+					'xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" ' +
+                    '<soapenv:Body>' +
+                        '<BANKCARD_AUTHONLY xmlns="wsVTExtensions"> ' +
+							'<M_ID>257143876349</M_ID> ' +
+							'<M_KEY>O4N1U5P5Y3P3</M_KEY> ' +
+							'<C_NAME>Thomas Hagan</C_NAME> ' +
+							'<C_ADDRESS>123 Main St</C_ADDRESS> ' +
+							'<C_CITY>Savannah</C_CITY> ' +
+							'<C_STATE>GA</C_STATE> ' +
+							'<C_ZIP>31405</C_ZIP> ' +
+							'<C_COUNTRY>US</C_COUNTRY> ' +
+							'<C_EMAIL>thlinux@gmail.com</C_EMAIL> ' +
+							'<C_CARDNUMBER>5454545454545454</C_CARDNUMBER> ' +
+							'<C_EXP>1221</C_EXP> ' +
+							'<C_CVV>998</C_CVV> ' +
+							'<T_CUSTOMER_NUMBER>0123</T_CUSTOMER_NUMBER> ' +
+							'<T_AMT>1.99</T_AMT> ' +
+							'<T_SHIPPING>0.00</T_SHIPPING> ' +
+							'<T_TAX>0.00</T_TAX> ' +
+							'<T_ORDERNUM>0123</T_ORDERNUM> ' +
+							'<C_TELEPHONE>555-555-5555</C_TELEPHONE> ' +
+							'<C_FAX></C_FAX> ' +
+							'<C_SHIP_NAME></C_SHIP_NAME> ' +
+							'<C_SHIP_ADDRESS></C_SHIP_ADDRESS> ' +
+							'<C_SHIP_CITY></C_SHIP_CITY> ' +
+							'<C_SHIP_STATE></C_SHIP_STATE> ' +
+							'<C_SHIP_ZIP></C_SHIP_ZIP> ' +
+							'<C_SHIP_COUNTRY></C_SHIP_COUNTRY> ' +
+							'<T_APPLICATION_ID></T_APPLICATION_ID> ' +
+							'<T_DEVICE_ID></T_DEVICE_ID> ' +
+						'</BANKCARD_AUTHONLY> ' +
+                    '</soapenv:Body>' +
+                '</soapenv:Envelope>';
+
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4) {
+                    if (xmlhttp.status == 200) {
+
+                        alert(sr);
+						alert(xmlhttp.responseText);
+                    }
+                }
+            }
+            // Send the POST request
+			xmlhttp.setRequestHeader('Content-Type', 'text/xml');
+			xmlhttp.setRequestHeader('SOAPAction', 'wsVTExtensions/BANKCARD_AUTHONLY');
+			xmlhttp.send(sr);
+            // send request
+            // ...
+        }
+    </script>
+</head>
+<body>
+    <form name="SOAP Demo" action="" method="post">
+        <div>
+            <input type="button" value="Process SOAP" onclick="soap();" />
+        </div>
+    </form>
+</body>
+<html>
